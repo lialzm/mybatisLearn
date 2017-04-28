@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.catfish.dao.UserDao">
+
+    <select id="queryByAge" resultType="map" parameterType="integer">
+        SELECT * from user WHERE age=#{age}
+    </select>
+
+
+    <select id="queryByAge2" resultType="com.catfish.entity.UserEntity">
+        SELECT * FROM  user WHERE age=#{age}
+    </select>
+
+    <resultMap id="userCardResult" type="com.catfish.entity.UserCard">
+        <id property="userId" column="user_id"/>
+        <result property="cardNo" column="card_no"/>
+    </resultMap>
+
+    <resultMap id="usermap" type="com.catfish.entity.UserEntity">
+        <id property="id" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <!--一对一-->
+        <association property="userCard" resultMap="userCardResult"/>
+        <!--一对多-->
+        <collection property="messageEntity" column="user_id" ofType="com.catfish.entity.UserMessageEntity">
+            <id property="id" column="id"/>
+            <result property="thirdType" column="third_type"/>
+            <result property="alias" column="alias"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryByAge3" resultMap="usermap">
+        SELECT u.id as user_id,u.name,
+        u.age,m.*,c.* FROM  user u LEFT JOIN user_card c on u.id=c.user_id LEFT JOIN  user_message m on u.id=m.user_id WHERE u.age=#{age}
+    </select>
+
+    <resultMap id="test" type="com.catfish.entity.UserEntity">
+        <id property="id" column="userId"/>
+        <result property="name" column="name"/>
+        <!--<result property="userCard.cardNo" column="cardNo"/>-->
+    </resultMap>
+
+    <!--一对一-->
+    <select id="queryByAge4" resultMap="test2">
+        SELECT u.id as userId,u.name,
+        c.card_no cardNo FROM  user u LEFT JOIN user_card c on u.id=c.user_id  WHERE u.age=#{age}
+    </select>
+
+    <!--resultMap的继承-->
+    <resultMap id="test2" extends="test" type="com.catfish.entity.UserEntity">
+        <result property="userCard.cardNo" column="cardNo"/>
+    </resultMap>
+
+    <!--嵌套查询-->
+    <select id="queryByUserId">
+      SELECT * from
+    </select>
+
+</mapper>
