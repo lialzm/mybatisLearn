@@ -1,6 +1,5 @@
-package com.catfish;
+package com.catfish.dao;
 
-import com.catfish.dao.UserDao;
 import com.catfish.entity.UserEntity;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +8,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,31 +23,30 @@ public class UserDaoTest {
     public void queryByAgeTest() {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        UserEntity userEntity = userMapper.queryByAge(2);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("age", 2);
+        UserEntity userEntity = userMapper.queryByAge(map);
         System.out.println(userEntity);
     }
 
     @Test
-    public void queryMapByAge() {
+    public void queryByAge2Test() {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        Map map = userMapper.queryMapByAge(2);
-        System.out.println(map);
-    }
-
-    @Test
-    public void queryListByAge() {
-        SqlSession sqlSession = getSessionFactory().openSession();
-        UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        List<UserEntity> list = userMapper.queryListByAge(3);
-        System.out.println(list);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", "test");
+        UserEntity userEntity = userMapper.queryByAge2(map);
+        System.out.println(userEntity);
     }
 
     @Test
     public void queryByAge3Test() {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        UserEntity userEntity = userMapper.queryByAge3(2);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", "test");
+        map.put("age", 2);
+        UserEntity userEntity = userMapper.queryByAge3(map);
         System.out.println(userEntity);
     }
 
@@ -54,15 +54,12 @@ public class UserDaoTest {
     public void queryByAge4Test() {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        UserEntity userEntity = userMapper.queryByAge4(2);
-        System.out.println(userEntity);
-    }
-
-    @Test
-    public void queryByAge5Test() {
-        SqlSession sqlSession = getSessionFactory().openSession();
-        UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        UserEntity userEntity = userMapper.queryByAge5(2);
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<Integer> ages=new ArrayList<Integer>();
+        ages.add(2);
+        ages.add(1);
+        map.put("ages", ages);
+        UserEntity userEntity = userMapper.queryByAge4(map);
         System.out.println(userEntity);
     }
 

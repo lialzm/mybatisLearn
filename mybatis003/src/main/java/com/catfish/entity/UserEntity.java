@@ -1,5 +1,7 @@
 package com.catfish.entity;
 
+import java.util.List;
+
 /**
  * Created by A on 2017/4/26.
  */
@@ -8,16 +10,9 @@ public class UserEntity {
     private Long id;
     private String name;
     private Integer age;
-    private UserCard userCard;
+    private List<UserMessageEntity> messageEntity;
 
 
-    public UserCard getUserCard() {
-        return userCard;
-    }
-
-    public void setUserCard(UserCard userCard) {
-        this.userCard = userCard;
-    }
 
     public Integer getAge() {
         return age;
@@ -42,6 +37,14 @@ public class UserEntity {
     public void setName(String name) {
         this.name = name;
     }
+/*
+    public List<UserMessageEntity> getMessageEntity() {
+        return messageEntity;
+    }
+
+    public void setMessageEntity(List<UserMessageEntity> messageEntity) {
+        this.messageEntity = messageEntity;
+    }*/
 
     @Override
     public String toString() {
@@ -49,8 +52,7 @@ public class UserEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-//                ", messageEntity=" + messageEntity +
-                ", userCard=" + userCard +
+                ", messageEntity=" + messageEntity +
                 '}';
     }
 }

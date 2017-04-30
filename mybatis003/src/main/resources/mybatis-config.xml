@@ -9,7 +9,7 @@
         <setting name="logImpl" value="LOG4J"/>
     </settings>
     <typeAliases>
-        <typeAlias type="com.catfish.entity.UserEntity" alias="user"/>
+        <package name="com.catfish.entity"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">

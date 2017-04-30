@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.catfish.dao.UserDao">
+
+
+    <resultMap id="usermap" type="com.catfish.entity.UserEntity">
+        <id property="id" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <!--一对多-->
+        <collection property="messageEntity" column="user_id" ofType="com.catfish.entity.UserMessageEntity">
+            <id property="id" column="id"/>
+            <result property="thirdType" column="third_type"/>
+            <result property="alias" column="alias"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryByAge" resultMap="usermap">
+        SELECT u.id as user_id,u.name,
+        u.age,m.* FROM  user u  LEFT JOIN  user_message m on u.id=m.user_id WHERE u.age=#{age}
+    </select>
+
+    <select id="messageResult" resultType="UserMessageEntity">
+        select * from user_message where user_id=#{userId};
+    </select>
+    <!--一对多,嵌套-->
+    <resultMap id="usermap2" type="com.catfish.entity.UserEntity">
+        <id property="id" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <collection property="messageEntity" select="messageResult" column="user_id"/>
+    </resultMap>
+
+
+    <select id="queryByAge2" resultMap="usermap2">
+        SELECT u.id as user_id,u.name,
+        u.age FROM  user u  WHERE u.age=#{age}
+    </select>
+
+
+</mapper>
