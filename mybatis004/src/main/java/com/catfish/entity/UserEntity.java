@@ -37,14 +37,14 @@ public class UserEntity {
     public void setName(String name) {
         this.name = name;
     }
-/*
+
     public List<UserMessageEntity> getMessageEntity() {
         return messageEntity;
     }
 
     public void setMessageEntity(List<UserMessageEntity> messageEntity) {
         this.messageEntity = messageEntity;
-    }*/
+    }
 
     @Override
     public String toString() {

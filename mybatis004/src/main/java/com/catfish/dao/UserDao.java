@@ -1,6 +1,7 @@
 package com.catfish.dao;
 
 import com.catfish.entity.UserEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
@@ -17,5 +18,7 @@ public interface UserDao {
     UserEntity queryByAge3(Map<String, Object> map);
 
     UserEntity queryByAge4(Map<String, Object> map);
+
+    Integer update(@Param("id")Integer id,@Param("name")String name);
 
 }

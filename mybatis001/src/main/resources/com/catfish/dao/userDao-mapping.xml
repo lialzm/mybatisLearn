@@ -12,6 +12,10 @@
         UPDATE user set name=#{name} where id=#{id}
     </update>
 
+    <update id="update1">
+        UPDATE user set name=#{name} where id=#{id}
+    </update>
+
     <delete id="del">
         DELETE FROM user  WHERE name=#{name}
     </delete>

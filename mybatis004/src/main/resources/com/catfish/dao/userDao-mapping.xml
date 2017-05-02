@@ -65,6 +65,12 @@
             </if>
         </where>
     </select>
-
+<select id="update" >
+    update user
+    <set>
+        user.name=#{name}
+    </set>
+    where user.id=#{id}
+</select>
 
 </mapper>

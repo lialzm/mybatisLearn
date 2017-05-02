@@ -58,10 +58,20 @@ public class UserDaoTest {
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
         UserEntity userEntity = new UserEntity();
         userEntity.setName("test1");
-        userEntity.setId(8L);
+        userEntity.setId(2L);
         userMapper.update(userEntity);
         sqlSession.commit();
     }
+
+    @Test
+    public void update1() {
+        SqlSession sqlSession = getSessionFactory().openSession();
+        UserDao userMapper = sqlSession.getMapper(UserDao.class);
+        userMapper.update1(1,"1122");
+        sqlSession.commit();
+    }
+
+
 
     //Mybatis 通过SqlSessionFactory获取SqlSession, 然后才能通过SqlSession与数据库进行交互
     private static SqlSessionFactory getSessionFactory() {
