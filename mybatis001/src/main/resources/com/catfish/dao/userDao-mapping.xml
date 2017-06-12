@@ -8,6 +8,10 @@
         INSERT into user(name) VALUES (#{name})
     </insert>
 
+    <insert id="insertMap" parameterType="map">
+        INSERT into user(name) VALUES (#{name})
+    </insert>
+
     <update id="update" parameterType="com.catfish.entity.UserEntity">
         UPDATE user set name=#{name} where id=#{id}
     </update>

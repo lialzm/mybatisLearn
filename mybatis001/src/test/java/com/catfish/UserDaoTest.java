@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by A on 2017/4/26.
@@ -21,9 +23,19 @@ public class UserDaoTest {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
         UserEntity userEntity = new UserEntity();
-        userEntity.setName("test");
+        userEntity.setName("111");
         Integer id = userMapper.insert(userEntity);
         System.out.println(id);
+        sqlSession.commit();
+    }
+
+    @Test
+    public void insertMap(){
+        SqlSession sqlSession = getSessionFactory().openSession();
+        UserDao userMapper = sqlSession.getMapper(UserDao.class);
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("name",null);
+        userMapper.insertMap(null);
         sqlSession.commit();
     }
 
@@ -48,7 +60,7 @@ public class UserDaoTest {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
         UserEntity userEntity = new UserEntity();
-        userEntity.setName("test");
+//        userEntity.setName("1");
         userMapper.del(userEntity);
     }
 
@@ -57,7 +69,7 @@ public class UserDaoTest {
         SqlSession sqlSession = getSessionFactory().openSession();
         UserDao userMapper = sqlSession.getMapper(UserDao.class);
         UserEntity userEntity = new UserEntity();
-        userEntity.setName("test1");
+//        userEntity.setName("2");
         userEntity.setId(2L);
         userMapper.update(userEntity);
         sqlSession.commit();
